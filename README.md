@@ -4,7 +4,7 @@ LoCyanFrp Panel, Powered by Naive-UI
 
 ## 地址
 
-- [LoCyanFrp Panel ](https://preview.locyanfrp.cn）
+- [LoCyanFrp Panel ](https://preview.locyanfrp.cn)
 
 ## 存在的意义
 
