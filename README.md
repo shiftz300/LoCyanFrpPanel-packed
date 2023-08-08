@@ -3,7 +3,8 @@
 LoCyanFrp Panel, Powered by Naive-UI
 
 ## 地址
-[新面板地址](https://preview.locyanfrp.cn）
+
+- [LoCyanFrp Panel](https://preview.locyanfrp.cn）
 
 ## 存在的意义
 
