@@ -12,6 +12,8 @@ LoCyanFrp Panel, Powered by Naive-UI
 
 以及对electron不是屎山的证伪
 
+目前目标为增加客户端应有的frpc管理功能
+
 ## 相关链接 & 使用的开源项目
 
 - [Emoji.json 『unpkg』](https://unpkg.com/emoji.json@14.0.0/emoji.json)
