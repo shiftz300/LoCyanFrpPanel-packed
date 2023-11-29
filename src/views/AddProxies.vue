@@ -60,7 +60,7 @@
         <n-form-item label="内网端口" path="local_port">
           <n-input
               v-model:value="ProxyInfo.local_port"
-              placeholder="内网端口, HTTP:80 HTTPS:443 MC:25565/19136 泰拉瑞亚:7777"
+              placeholder="内网端口, HTTP:80 HTTPS:443 MC:25565/19132 泰拉瑞亚:7777"
           />
         </n-form-item>
       </n-grid-item>
@@ -79,6 +79,12 @@
           <n-input
               v-model:value="ProxyInfo.domain"
               placeholder="HTTPS/HTTP需要填写, 其他协议不需要填写"
+          />
+        </n-form-item>
+        <n-form-item label="访问密钥" path="sk" v-show="ShowSecretKeyInput">
+          <n-input
+              v-model:value="ProxyInfo.sk"
+              placeholder="XTCP / STCP 需要填写, 其他协议不需要填写"
           />
         </n-form-item>
       </n-grid-item>
@@ -125,6 +131,7 @@ const ProxyInfo = ref({
   local_port: "",
   remote_port: "",
   domain: "",
+  sk: "",
 });
 const EditCheck = ref(false);
 const rules = {
@@ -135,7 +142,7 @@ const rules = {
       if (!value) {
         EditCheck.value = false;
         return new Error("请输入隧道名");
-      } else if (!/[A-Za-z0-9_]$/.test(value)) {
+      } else if (!/[a-zA-Z0-9]{1,16}$/.test(value)) {
         EditCheck.value = false;
         return new Error("隧道名格式错误，由字母，数字和下划线组成");
       }
@@ -221,9 +228,11 @@ const rules = {
   },
 };
 const ShowDomainInput = ref(false);
+const ShowSecretKeyInput = ref(false);
 
 function ProxyTypeSelectChangeHandle(value) {
   ShowDomainInput.value = value === "3" || value === "4";
+  ShowSecretKeyInput.value = value === "5" || value === "6";
 }
 
 function RandomPort(){
@@ -262,7 +271,9 @@ function addproxy() {
       "&token=" +
       store.getters.get_token +
       "&url=" +
-      ProxyInfo.value.domain
+      ProxyInfo.value.domain +
+      "&sk=" +
+      ProxyInfo.value.sk
   );
   rs.then((res) => {
     if (res.status === true) {
@@ -273,7 +284,7 @@ function addproxy() {
   });
 }
 
-const rs = get("https://api.locyanfrp.cn/Proxies/GetServerList", []);
+const rs = get("https://api-v2.locyanfrp.cn/api/v2/nodes/list", []);
 rs.then((res) => {
   var i = 0;
   res.forEach((s) => {

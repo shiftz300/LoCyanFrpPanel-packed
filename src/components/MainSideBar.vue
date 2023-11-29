@@ -41,6 +41,8 @@ import {
   PencilSharp,
   Person,
   PlanetOutline,
+  KeyOutline,
+  CompassSharp
 } from "@vicons/ionicons5";
 import {AttachMoneyFilled} from "@vicons/material";
 
@@ -59,7 +61,7 @@ const menuOptions = [
     path: "/dashboard",
     label: "仪表盘",
     key: "DashBoard",
-    icon: renderIcon(InformationCircleOutline),
+    icon: renderIcon(CompassSharp),
   },
   {
     label: "周年庆活动",
@@ -122,34 +124,46 @@ const menuOptions = [
   },
   {
     path: "/xmnetwork/bore",
-    label: "Bore穿透",
+    label: "Bore 穿透",
     key: "XMNWC-Bore",
     icon: renderIcon(Flash),
   },
   {
     path: "/donate",
-    label: "捐赠",
+    label: "赞助",
     key: "Donate",
     icon: renderIcon(AttachMoneyFilled),
+  },
+  {
+    path: "/icp",
+    label: "域名白名单",
+    key: "Icp",
+    icon: renderIcon(KeyOutline),
+  },
+  {
+    path: "/status",
+    label: "节点状态",
+    key: "Status",
+    icon: renderIcon(List),
   },
   {
     label: "其他功能",
     key: "other_options",
     icon: renderIcon(BookIcon),
     children: [
-      {
-        label: () =>
-            h(
-                "a",
-                {
-                  href: "https://download.locyan.cn",
-                  target: "_blank",
-                },
-                "软件下载"
-            ),
-        key: "software_download",
-        icon: renderIcon(CloudDownloadOutline),
-      }, 
+      // {
+      //   label: () =>
+      //       h(
+      //           "a",
+      //           {
+      //             href: "https://download.locyan.cn",
+      //             target: "_blank",
+      //           },
+      //           "软件下载"
+      //       ),
+      //   key: "software_download",
+      //   icon: renderIcon(CloudDownloadOutline),
+      // }, 
       {
         label: () =>
             h(
@@ -158,7 +172,7 @@ const menuOptions = [
                   href: "https://pan.1l1.icu/s/MAhO?password=o28hn3",
                   target: "_blank",
                 },
-                "上面那个挂了就用这个"
+                "软件下载"
             ),
         key: "software_download_backup",
         icon: renderIcon(CloudDownloadOutline),

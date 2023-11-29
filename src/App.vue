@@ -77,9 +77,10 @@ setInterval(() => {
       if (res.status === 0) {
         localStorage.setItem("proxies", res.proxies_num);
         localStorage.setItem("traffic", res.traffic);
+        localStorage.setItem("set_limit", res);
       }
       if (res.status === -3) {
-        sendWarningMessage("登录过期或未登录，请使用 LCF 账户登录后台！");
+        sendWarningMessage("登录过期或未登录，请重新登录后台！");
         logout();
       }
     });

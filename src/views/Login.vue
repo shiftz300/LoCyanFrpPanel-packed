@@ -30,7 +30,7 @@
         <div>
           <n-space justify="space-between">
             <n-button type="info" @click="qqlogin" :loading="qqlogin_loading">
-              QQ登录
+              QQ 登录
             </n-button>
             <n-space justify="end">
               <n-button type="primary" @click="login"> 登录</n-button>
@@ -60,9 +60,8 @@
 <script setup>
 import {ref} from "vue";
 import {useLoadingBar, useMessage} from "naive-ui";
-import {get, getUrlKey} from "../utils/request.js";
+import {get, getUrlKey, post} from "../utils/request.js";
 import router from "../router/index.js";
-import qs from "qs";
 import store from "../utils/stores/store.js";
 
 const formRef = ref(null);
@@ -99,7 +98,7 @@ if (username_qq !== null || token_qq !== null) {
   );
   rs.then((res) => {
     if (res.status) {
-      message.success("欢迎回来，指挥官！" + res.userdata.username);
+      message.success(res.userdata.username + "，欢迎回来！");
       store.commit("set_token", res.token);
       store.commit("set_user_info", res.userdata);
       router.push(redirect || "/dashboard");
@@ -123,19 +122,16 @@ function login() {
     ldb.error();
     return;
   }
-  const rs = get(
-      "https://api.locyanfrp.cn/User/DoLogin?" + qs.stringify(model.value),
-      []
-  );
+  const rs = post("https://api-v2.locyanfrp.cn/api/v2/users/login", model.value);
   rs.then((res) => {
-    if (res.status === 0) {
-      message.success("欢迎回来，指挥官！" + model.value.username);
-      store.commit("set_token", res.token);
-      store.commit("set_user_info", res.userdata);
+    if (res.status === 200) {
+      message.success(model.value.username + "，欢迎回来！");
+      store.commit("set_token", res.data.token);
+      store.commit("set_user_info", res.data);
       router.push(redirect || "/dashboard");
       ldb.finish();
     } else {
-      message.warning(res.message);
+      message.warning(res.data.msg);
       ldb.error();
     }
   });

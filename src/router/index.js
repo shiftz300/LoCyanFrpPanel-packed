@@ -123,7 +123,7 @@ const routes = [
                 name: "XMNWC-Bore",
                 meta: {
                     keepAlive: true,
-                    title: "bore穿透",
+                    title: "Bore 穿透",
                 },
                 component: () => import("../views/XMNWCBore.vue"),
             },
@@ -135,6 +135,24 @@ const routes = [
                     title: "赞助",
                 },
                 component: () => import("../views/Donate.vue"),
+            },
+            {
+                path: "/icp",
+                name: "Icp",
+                meta: {
+                    keepAlive: true,
+                    title: "域名白名单",
+                },
+                component: () => import("../views/IcpCheck.vue"),
+            },
+            {
+                path: "/status",
+                name: "Status",
+                meta: {
+                    keepAlive: true,
+                    title: "节点状态",
+                },
+                component: () => import("../views/Status.vue"),
             },
         ],
     },
